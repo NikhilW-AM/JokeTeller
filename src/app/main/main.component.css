@@ -1,0 +1,38 @@
+.container {
+  background: rgb(85, 83, 83);
+  margin: 35px 45px;
+  padding: 15px;
+  display: block;
+  background-color: var(--bg-accent-color);
+  border: 2px solid #fff;
+  border-radius: 10px;
+  padding: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.main {
+  background: black;
+  border: 2px solid rgb(241, 238, 238);
+  border-radius: 10px;
+  color: aliceblue;
+  margin-top: 5;
+}
+.multiselect {
+  border: 1.5px solid white;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+#catSelectMulti input {
+  font-size: 17px;
+  margin: 3px;
+  padding: 3px;
+}
+
+tr {
+  margin: 20px 20px;
+  padding: 30px;
+}

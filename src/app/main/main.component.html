@@ -1,0 +1,142 @@
+<div class="container">
+  <div class="main">
+    <form [formGroup]="jokeTellerForm">
+      <table>
+        <tbody>
+          <tr>
+            <td>
+              Select <a href="#categories">category / categories</a>:
+            </td>
+            <td>
+              <div class="multiselect noselect" id="categoryWrapper" style="border-color: initial;">
+                <div>
+                  <input type="radio" name="catSelect" value="any" id="cat-radio1" checked
+                    (click)="changeCatagory($event)"><label>Any</label>
+                </div>
+                <div>
+                  <input type="radio" name="catSelect" value="multi"
+                    (click)="changeCatagory($event)"><label>Custom:</label>
+                  <span id="catSelectMulti" *ngFor="let cat of catagoryArray;let i=index">
+                    <input [disabled]="catagory" type="checkbox" (click)="selectCatagory(cat,i)" [checked]="cat.value"
+                      [value]="cat.value"><label>{{cat.catagory}}</label>
+                  </span>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Select <a href="#languages-endpoint">language</a>:
+            </td>
+            <td>
+              <div class="multiselect noselect">
+                <select id="lcodeSelect" (change)="selectLanguage($event)" formControlName="language" name="language">
+                  <option value="cs">cs - Czech</option>
+                  <option value="de">de - German</option>
+                  <option value="en" selected>en - English</option>
+                  <option value="es">es - Spanish</option>
+                  <option value="fr">fr - French</option>
+                  <option value="pt">pt - Portuguese</option>
+                </select>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Select <a href="#blacklist-flags">flags</a> to blacklist:
+            </td>
+            <td>
+              <div class="multiselect noselect" formArrayName="flags">
+                (optional)&nbsp;&nbsp;&nbsp;
+                <ng-container *ngFor="let flag of flagArray;let i=index ">
+                  <input type="checkbox" [value]="flag.value" [checked]="flag.value"
+                    (click)="selectFlags(flag,i)"><label for="blf-cb1">{{flag.f}}</label>
+                </ng-container>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Select <a href="#response-formats">response format</a>:
+            </td>
+            <td>
+              <div class="multiselect noselect">
+                <input type="radio" id="fmt-cb1" name="formatRadio" checked (click)="selectFormat('')"><label
+                  for="fmt-cb1">default
+                  (json)</label>
+
+                <ng-container *ngFor="let format of formatArray">
+                  <input type="radio" id="fmt-cb2" name="formatRadio"
+                    (click)="selectFormat(format)"><label>{{format}}</label>
+                </ng-container>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Select at least one <a href="#joke-type">joke type</a>:
+            </td>
+            <td>
+              <div class="multiselect noselect" id="typeSelectWrapper" style="border-color: initial;">
+                <ng-container *ngFor="let type of typeArray;let i=index">
+                  <input type="checkbox" [checked]="type.value" [value]="type.t" (change)="selectType(type,i)"
+                    formArrayName="type"><label>{{type.t}}</label>
+                </ng-container>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Search for a joke that<br>contains this <a href="#search-string">search string</a>:
+            </td>
+            <td>
+              <div class="multiselect noselect">
+                <input type="text" id="searchStringInput" placeholder="(optional)" formControlName="contentSearch"
+                  name="contentSearch">
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Search for a joke<br>in this <a>ID range</a>:
+            </td>
+            <td>
+              <div class="multiselect noselect" id="idRangeWrapper" style="border-color: initial;">
+                (optional)&nbsp;&nbsp;&nbsp;
+                From: <input type="number" id="idRangeInputFrom" [value]="sRange" [min]="start" step="1" [max]="end"
+                  (click)="increaseRange($event)">
+                To: <input type="number" id="idRangeInputTo" [value]="eRange" [min]="start" step="1" [max]="end"
+                  (click)=" decreaseRange($event)">
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a href="#amount">Amount</a> of jokes:
+            </td>
+            <td>
+              <div class="multiselect noselect" id="jokeAmountWrapper" style="border-color: initial;">
+                <input type="number" id="jokesAmountInput" value="1" min="1" step="1" max="10" formControlName="amount"
+                  name="amount">
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- <button class="btn btn-primary" (click)="onSubmit()">Submit</button> -->
+    </form>
+    <div id="urlBuilderWrapper" class="flexItem">
+      <br>
+      <button (click)="resetForm()">Reset Form</button> <button (click)="onSubmit()">Send Request
+        &gt;</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- <div class="multiselect noselect">
+    <select id="lcodeSelect" (change)="selectLanguage($event)">
+      <option *ngFor="let item of langugeArray" [selected]="item.lang === 'en'">{{item.lang}}</option>
+    </select>
+  </div>
+{{jokeTellerForm.value | json}}-->
